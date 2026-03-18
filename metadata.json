@@ -1,0 +1,5 @@
+{
+  "name": "COSMOS - NASA Data Explorer",
+  "description": "A minimal-dark NASA data explorer featuring Mars Weather, NEO Tracker, and ISS Live Tracker.",
+  "requestFramePermissions": ["geolocation"]
+}
