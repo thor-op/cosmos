@@ -10,7 +10,7 @@ const STACK = [
   { label: 'ANIMATION', value: 'Motion', sub: 'Spring physics · Layout animations' },
   { label: 'STYLING', value: 'Tailwind CSS v4', sub: 'Utility-first · CSS variables' },
   { label: 'LANGUAGE', value: 'TypeScript', sub: 'Strict mode · Full type safety' },
-  { label: 'DEPLOYMENT', value: 'Edge Runtime', sub: 'Next.js API routes · ISR' },
+  { label: 'DEPLOYMENT', value: 'Edge Runtime', sub: 'Next.js API routes · ISR · NOAA/DONKI proxy' },
 ];
 
 const APIS = [
@@ -70,6 +70,46 @@ const APIS = [
     color: '#c084fc',
     status: 'LIVE',
   },
+  {
+    id: '08',
+    name: 'NOAA SWPC',
+    endpoint: 'services.swpc.noaa.gov/products',
+    desc: 'Real-time solar wind plasma and magnetic field data (5-minute cadence). Estimated planetary Kp index updated every minute.',
+    color: '#facc15',
+    status: 'LIVE',
+  },
+  {
+    id: '09',
+    name: 'NASA DONKI',
+    endpoint: 'api.nasa.gov/DONKI',
+    desc: 'Space Weather Database of Notifications, Knowledge, Information. Solar flare events and coronal mass ejections for the last 30 days.',
+    color: '#facc15',
+    status: 'LIVE',
+  },
+  {
+    id: '10',
+    name: 'NASA EPIC',
+    endpoint: 'api.nasa.gov/EPIC/api/natural',
+    desc: 'Full-disk Earth imagery from DSCOVR at the L1 Lagrange point. Natural and enhanced color collections, up to 22 frames per day at 2048×2048px.',
+    color: '#60a5fa',
+    status: 'LIVE',
+  },
+  {
+    id: '11',
+    name: 'NOAA GOES-19 SUVI',
+    endpoint: 'services.swpc.noaa.gov/images/animations/suvi',
+    desc: 'Solar Ultraviolet Imager aboard GOES-19. Full-disk Sun imagery in 6 EUV wavelengths (94–304 Å), updated every few minutes.',
+    color: '#fb923c',
+    status: 'LIVE',
+  },
+  {
+    id: '12',
+    name: 'USGS Earthquake Hazards',
+    endpoint: 'earthquake.usgs.gov/earthquakes/feed/v1.0',
+    desc: 'Real-time GeoJSON feed of global seismic events. M2.5+ earthquakes for the past 7 days with magnitude, depth, coordinates, and timestamp.',
+    color: '#4ade80',
+    status: 'LIVE',
+  },
 ];
 
 const MODULES = [
@@ -115,6 +155,50 @@ const MODULES = [
       'Date picker spanning the entire archive — every day since June 16, 1995.',
       'HD image loaded when available. Video APODs fall back to embedded iframe.',
       'Slide-in info panel with full NASA explanation text and copyright attribution.',
+    ],
+  },
+  {
+    id: 'SOLAR',
+    color: '#facc15',
+    title: 'Space Weather Monitor',
+    lines: [
+      'Real-time Kp index from NOAA SWPC with geomagnetic storm classification (G1–G5).',
+      'Live solar wind speed, density, Bt and Bz from NOAA 5-minute plasma/mag feeds.',
+      'Solar flare log (last 30 days) and CME events from NASA DONKI API.',
+      'Aurora visibility latitude calculated from current Kp. Refreshes every 60 seconds.',
+    ],
+  },
+  {
+    id: 'EPIC',
+    color: '#60a5fa',
+    title: 'EPIC Earth — Full Disk Imagery',
+    lines: [
+      'Full-disk Earth photos from NASA\'s DSCOVR satellite at the L1 Lagrange point, 1.5M km away.',
+      'Natural and enhanced color collections. Up to 22 images per day at 2048×2048px.',
+      'Filmstrip scrubber to step through the day\'s captures. Autoplay timelapse mode.',
+      'Per-image metadata: centroid coordinates, DSCOVR/Sun J2000 positions, capture time.',
+    ],
+  },
+  {
+    id: 'SDO',
+    color: '#fb923c',
+    title: 'GOES-19 Solar Imager',
+    lines: [
+      'Live full-disk Sun imagery from GOES-19 SUVI in 6 extreme ultraviolet wavelengths.',
+      'Each wavelength reveals a different temperature layer — from chromosphere to 10M K flare plasma.',
+      'Autoplay cycles through all bands. Refresh pulls the latest image from NOAA SWPC.',
+      'Wavelength guide with temperature ranges and solar feature descriptions.',
+    ],
+  },
+  {
+    id: 'QUAKE',
+    color: '#4ade80',
+    title: 'Seismic · Solar Correlation',
+    lines: [
+      'Real-time USGS earthquake feed — M2.5+ events globally for the past 7 days.',
+      'Every quake rendered as a ripple animation on a 3D Earth globe, color-coded by magnitude.',
+      'Overlays live NOAA solar wind Bz — the geomagnetic coupling parameter.',
+      'Magnitude filter, event list, and detail panel. Correlation is visual, not scientific.',
     ],
   },
 ];
@@ -241,8 +325,8 @@ export function About() {
       {/* ── STATS ROW ── */}
       <section className="border-b border-white/5 grid grid-cols-2 md:grid-cols-4">
         {[
-          { n: 7, suffix: '', label: 'LIVE DATA SOURCES' },
-          { n: 4, suffix: '', label: 'INTERACTIVE MODULES' },
+          { n: 12, suffix: '', label: 'LIVE DATA SOURCES' },
+          { n: 8, suffix: '', label: 'INTERACTIVE MODULES' },
           { n: 5, suffix: 'S', label: 'ISS UPDATE INTERVAL' },
           { n: 100, suffix: '%', label: 'FREE & OPEN SOURCE' },
         ].map((s, i) => (
@@ -290,7 +374,7 @@ export function About() {
                 >
                   {mod.id}
                 </span>
-                <span className="text-[10px] tracking-[0.2em] text-white/20 uppercase">{`0${i + 1} / 04`}</span>
+                <span className="text-[10px] tracking-[0.2em] text-white/20 uppercase">{`0${i + 1} / 08`}</span>
               </div>
 
               <div>

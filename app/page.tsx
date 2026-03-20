@@ -7,6 +7,10 @@ import { NeoTracker } from '@/components/NeoTracker';
 import { IssTracker } from '@/components/IssTracker';
 import { About } from '@/components/About';
 import { Apod } from '@/components/Apod';
+import { SpaceWeather } from '@/components/SpaceWeather';
+import { EpicEarth } from '@/components/EpicEarth';
+import { SdoViewer } from '@/components/SdoViewer';
+import { QuakeTracker } from '@/components/QuakeTracker';
 import { AnimatePresence, motion } from 'motion/react';
 
 export default function Home() {
@@ -64,6 +68,54 @@ export default function Home() {
               className="h-full w-full"
             >
               <Apod />
+            </motion.div>
+          )}
+          {activeModule === 'space-weather' && (
+            <motion.div
+              key="space-weather"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.3 }}
+              className="h-full w-full"
+            >
+              <SpaceWeather />
+            </motion.div>
+          )}
+          {activeModule === 'epic' && (
+            <motion.div
+              key="epic"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.3 }}
+              className="h-full w-full"
+            >
+              <EpicEarth />
+            </motion.div>
+          )}
+          {activeModule === 'sdo' && (
+            <motion.div
+              key="sdo"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.3 }}
+              className="h-full w-full"
+            >
+              <SdoViewer />
+            </motion.div>
+          )}
+          {activeModule === 'quake' && (
+            <motion.div
+              key="quake"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.3 }}
+              className="h-full w-full"
+            >
+              <QuakeTracker />
             </motion.div>
           )}
           {activeModule === 'about' && (

@@ -1,11 +1,11 @@
 'use client';
 
 import { motion } from 'motion/react';
-import { Compass, Orbit, Satellite, Info, ImageIcon } from 'lucide-react';
+import { Compass, Orbit, Satellite, Info, ImageIcon, Zap, Globe, Sun, Activity } from 'lucide-react';
 import { clsx } from 'clsx';
 import { twMerge } from 'tailwind-merge';
 
-export type ModuleType = 'mars' | 'neo' | 'iss' | 'apod' | 'about';
+export type ModuleType = 'mars' | 'neo' | 'iss' | 'apod' | 'space-weather' | 'epic' | 'sdo' | 'quake' | 'about';
 
 interface SidebarProps {
   activeModule: ModuleType;
@@ -18,6 +18,10 @@ export function Sidebar({ activeModule, setActiveModule }: SidebarProps) {
     { id: 'neo', label: 'NEO', icon: Orbit, color: 'bg-[var(--color-neo)]' },
     { id: 'iss', label: 'ISS', icon: Satellite, color: 'bg-[var(--color-iss)]' },
     { id: 'apod', label: 'APOD', icon: ImageIcon, color: 'bg-purple-400' },
+    { id: 'epic', label: 'EPIC', icon: Globe, color: 'bg-blue-400' },
+    { id: 'space-weather', label: 'SOLAR', icon: Zap, color: 'bg-yellow-400' },
+    { id: 'sdo', label: 'SDO', icon: Sun, color: 'bg-orange-400' },
+    { id: 'quake', label: 'QUAKE', icon: Activity, color: 'bg-green-400' },
     { id: 'about', label: 'ABOUT', icon: Info, color: 'bg-white' },
   ] as const;
 
@@ -44,6 +48,13 @@ export function Sidebar({ activeModule, setActiveModule }: SidebarProps) {
             >
               <Icon size={20} strokeWidth={isActive ? 2 : 1.5} />
               <span className="text-[10px] font-mono tracking-widest uppercase mt-1 md:hidden">
+                {item.label}
+              </span>
+
+              {/* Tooltip — desktop only */}
+              <span className="pointer-events-none absolute left-full ml-4 top-1/2 -translate-y-1/2 hidden md:block
+                px-2.5 py-1.5 bg-[#111] border border-white/10 text-[9px] tracking-[0.25em] text-white/70 uppercase
+                whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity duration-150 z-50">
                 {item.label}
               </span>
               
