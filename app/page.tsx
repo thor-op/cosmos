@@ -11,6 +11,14 @@ import { SpaceWeather } from '@/components/SpaceWeather';
 import { EpicEarth } from '@/components/EpicEarth';
 import { SdoViewer } from '@/components/SdoViewer';
 import { QuakeTracker } from '@/components/QuakeTracker';
+import { SolarSystem } from '@/components/SolarSystem';
+import Galaxies from '@/components/Galaxies';
+import { EarthWeather } from '@/components/EarthWeather';
+import { Thunder } from '@/components/Thunder';
+import { Storms } from '@/components/Storms';
+import { Signal } from '@/components/Signal';
+import { Selene } from '@/components/Selene';
+import { Tides } from '@/components/Tides';
 import { AnimatePresence, motion } from 'motion/react';
 
 export default function Home() {
@@ -107,15 +115,48 @@ export default function Home() {
             </motion.div>
           )}
           {activeModule === 'quake' && (
-            <motion.div
-              key="quake"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              transition={{ duration: 0.3 }}
-              className="h-full w-full"
-            >
+            <motion.div key="quake" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} transition={{ duration: 0.3 }} className="h-full w-full">
               <QuakeTracker />
+            </motion.div>
+          )}
+          {activeModule === 'system' && (
+            <motion.div key="system" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} transition={{ duration: 0.3 }} className="h-full w-full">
+              <SolarSystem />
+            </motion.div>
+          )}
+          {activeModule === 'galaxies' && (
+            <motion.div key="galaxies" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} transition={{ duration: 0.3 }} className="h-full w-full">
+              <Galaxies />
+            </motion.div>
+          )}
+          {activeModule === 'weather' && (
+            <motion.div key="weather" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} transition={{ duration: 0.3 }} className="h-full w-full">
+              <EarthWeather />
+            </motion.div>
+          )}
+          {activeModule === 'thunder' && (
+            <motion.div key="thunder" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} transition={{ duration: 0.3 }} className="h-full w-full">
+              <Thunder />
+            </motion.div>
+          )}
+          {activeModule === 'storms' && (
+            <motion.div key="storms" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} transition={{ duration: 0.3 }} className="h-full w-full">
+              <Storms />
+            </motion.div>
+          )}
+          {activeModule === 'signal' && (
+            <motion.div key="signal" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} transition={{ duration: 0.3 }} className="h-full w-full">
+              <Signal />
+            </motion.div>
+          )}
+          {activeModule === 'selene' && (
+            <motion.div key="selene" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} transition={{ duration: 0.3 }} className="h-full w-full">
+              <Selene />
+            </motion.div>
+          )}
+          {activeModule === 'tides' && (
+            <motion.div key="tides" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} transition={{ duration: 0.3 }} className="h-full w-full">
+              <Tides />
             </motion.div>
           )}
           {activeModule === 'about' && (

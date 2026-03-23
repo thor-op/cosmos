@@ -1,11 +1,11 @@
 'use client';
 
 import { motion } from 'motion/react';
-import { Compass, Orbit, Satellite, Info, ImageIcon, Zap, Globe, Sun, Activity } from 'lucide-react';
+import { Compass, Orbit, Satellite, Info, ImageIcon, Zap, Globe, Sun, Activity, Layers, Telescope, CloudRain, CloudLightning, Wind, Radio, Moon, Waves } from 'lucide-react';
 import { clsx } from 'clsx';
 import { twMerge } from 'tailwind-merge';
 
-export type ModuleType = 'mars' | 'neo' | 'iss' | 'apod' | 'space-weather' | 'epic' | 'sdo' | 'quake' | 'about';
+export type ModuleType = 'mars' | 'neo' | 'iss' | 'apod' | 'space-weather' | 'epic' | 'sdo' | 'quake' | 'system' | 'galaxies' | 'weather' | 'thunder' | 'storms' | 'signal' | 'selene' | 'tides' | 'about';
 
 interface SidebarProps {
   activeModule: ModuleType;
@@ -22,18 +22,28 @@ export function Sidebar({ activeModule, setActiveModule }: SidebarProps) {
     { id: 'space-weather', label: 'SOLAR', icon: Zap, color: 'bg-yellow-400' },
     { id: 'sdo', label: 'SDO', icon: Sun, color: 'bg-orange-400' },
     { id: 'quake', label: 'QUAKE', icon: Activity, color: 'bg-green-400' },
-    { id: 'about', label: 'ABOUT', icon: Info, color: 'bg-white' },
+    { id: 'system', label: 'SYSTEM', icon: Layers, color: 'bg-teal-400' },
+    { id: 'galaxies', label: 'GALAXIES', icon: Telescope, color: 'bg-violet-400' },
+    { id: 'weather',  label: 'WEATHER',  icon: CloudRain,       color: 'bg-sky-400' },
+    { id: 'thunder',  label: 'THUNDER',  icon: CloudLightning,  color: 'bg-yellow-300' },
+    { id: 'storms',   label: 'STORMS',   icon: Wind,            color: 'bg-cyan-400' },
+    { id: 'signal',   label: 'SIGNAL',   icon: Radio,           color: 'bg-emerald-400' },
+    { id: 'selene',   label: 'SELENE',   icon: Moon,            color: 'bg-yellow-100'  },
+    { id: 'tides',    label: 'TIDES',    icon: Waves,           color: 'bg-sky-300'     },
+    { id: 'about',    label: 'ABOUT',    icon: Info,            color: 'bg-white' },
   ] as const;
 
   return (
-    <nav className="fixed top-0 left-0 w-full h-16 md:w-16 md:h-full border-b md:border-b-0 md:border-r border-white/10 bg-[#080808]/80 backdrop-blur-md z-50 flex md:flex-col items-center justify-between md:justify-center px-4 md:px-0 py-0 md:py-8">
-      <div className="hidden md:flex flex-col items-center gap-2 mb-auto">
+    <nav className="fixed top-0 left-0 w-full h-16 md:w-16 md:h-full border-b md:border-b-0 md:border-r border-white/10 bg-[#080808]/80 backdrop-blur-md z-50 flex md:flex-col items-center px-4 md:px-0 py-0 md:py-4">
+      {/* Logo */}
+      <div className="hidden md:flex flex-col items-center gap-2 shrink-0 py-4">
         <div className="w-8 h-8 rounded-full border border-white/20 flex items-center justify-center">
           <span className="text-xs font-bold tracking-tighter">CO</span>
         </div>
       </div>
 
-      <div className="flex md:flex-col items-center gap-8 md:gap-12 w-full md:w-auto justify-center">
+      {/* Scrollable nav — desktop: vertical scroll, mobile: horizontal scroll */}
+      <div className="flex md:flex-col items-center gap-6 md:gap-8 w-full md:w-auto justify-start md:justify-start overflow-x-auto md:overflow-y-auto md:overflow-x-hidden flex-1 md:py-4 [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]">
         {navItems.map((item) => {
           const isActive = activeModule === item.id;
           const Icon = item.icon;
@@ -42,7 +52,7 @@ export function Sidebar({ activeModule, setActiveModule }: SidebarProps) {
               key={item.id}
               onClick={() => setActiveModule(item.id)}
               className={twMerge(
-                "relative flex flex-col items-center gap-1 group transition-colors duration-300",
+                "relative flex flex-col items-center gap-1 group transition-colors duration-300 shrink-0",
                 isActive ? "text-white" : "text-white/40 hover:text-white/80"
               )}
             >
@@ -57,7 +67,7 @@ export function Sidebar({ activeModule, setActiveModule }: SidebarProps) {
                 whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity duration-150 z-50">
                 {item.label}
               </span>
-              
+
               {isActive && (
                 <motion.div
                   layoutId="activeIndicator"
@@ -70,7 +80,7 @@ export function Sidebar({ activeModule, setActiveModule }: SidebarProps) {
         })}
       </div>
 
-      <div className="hidden md:block mt-auto">
+      <div className="hidden md:block shrink-0 py-4">
         <div className="w-1 h-1 rounded-full bg-white/20" />
       </div>
     </nav>

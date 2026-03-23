@@ -50,8 +50,8 @@ const APIS = [
     id: '05',
     name: 'Open-Meteo',
     endpoint: 'api.open-meteo.com/v1/forecast',
-    desc: 'Free, open-source weather API. Provides local Earth conditions for real-time comparison against Martian atmospheric data.',
-    color: '#ffffff',
+    desc: 'Free, open-source weather API. Powers local Earth conditions for Mars comparison and the full Earth Weather module — current conditions, 7-day forecast, UV, sunrise/sunset, and air quality.',
+    color: '#38bdf8',
     status: 'LIVE',
   },
   {
@@ -108,6 +108,62 @@ const APIS = [
     endpoint: 'earthquake.usgs.gov/earthquakes/feed/v1.0',
     desc: 'Real-time GeoJSON feed of global seismic events. M2.5+ earthquakes for the past 7 days with magnitude, depth, coordinates, and timestamp.',
     color: '#4ade80',
+    status: 'LIVE',
+  },
+  {
+    id: '13',
+    name: 'Open-Meteo Weather',
+    endpoint: 'api.open-meteo.com/v1/forecast',
+    desc: 'Free open-source weather API. Current conditions, 7-day forecast, UV index, sunrise/sunset, and precipitation for any coordinate on Earth. Also powers the air quality feed (US AQI, PM2.5, PM10).',
+    color: '#38bdf8',
+    status: 'LIVE',
+  },
+  {
+    id: '14',
+    name: '100,000 Stars — COSMOS',
+    endpoint: 'stars.thorxop.dev',
+    desc: 'Original Chrome Experiment by the Google Data Arts Team. 119,617 stars from the Hipparcos catalog with real XYZ positions, B-V color indices, spectral data, and named star systems. Embedded and restyled with custom HUD, narrated tour, and spectral mode.',
+    color: '#a78bfa',
+    status: 'STATIC',
+  },
+  {
+    id: '15',
+    name: 'Blitzortung Lightning Network',
+    endpoint: 'ws.blitzortung.org',
+    desc: 'Crowdsourced real-time global lightning detection network. WebSocket stream of strike coordinates, timestamps, and signal metadata from thousands of volunteer stations worldwide.',
+    color: '#facc15',
+    status: 'LIVE',
+  },
+  {
+    id: '16',
+    name: 'JTWC RSS — Tropical Storms',
+    endpoint: 'metoc.navy.mil/jtwc/rss',
+    desc: 'Joint Typhoon Warning Center RSS feed for active tropical cyclones. Storm name, category, coordinates, wind speed, pressure, and 5-day forecast track points.',
+    color: '#34d399',
+    status: 'LIVE',
+  },
+  {
+    id: '17',
+    name: 'NASA Deep Space Network',
+    endpoint: 'eyes.nasa.gov/dsn/data/dsn.xml',
+    desc: 'Live telemetry from the three DSN complexes — Goldstone, Madrid, and Canberra. Active dish targets, signal direction, uplink/downlink rates, and spacecraft identifiers updated every 5 seconds.',
+    color: '#38bdf8',
+    status: 'LIVE',
+  },
+  {
+    id: '18',
+    name: 'NASA LROC / Solar System Scope',
+    endpoint: 'api/moon-texture (proxied)',
+    desc: 'Lunar Reconnaissance Orbiter Camera color and displacement maps. High-resolution surface texture and topographic bump map for the interactive 3D Moon globe.',
+    color: '#94a3b8',
+    status: 'STATIC',
+  },
+  {
+    id: '19',
+    name: 'NOAA Tides & Currents',
+    endpoint: 'api.tidesandcurrents.noaa.gov/api/prod',
+    desc: 'Hourly tidal predictions for US coastal stations. Water level relative to MLLW datum, used to drive the live tide sparklines and flooding/ebbing trend indicators.',
+    color: '#4FC3F7',
     status: 'LIVE',
   },
 ];
@@ -199,6 +255,95 @@ const MODULES = [
       'Every quake rendered as a ripple animation on a 3D Earth globe, color-coded by magnitude.',
       'Overlays live NOAA solar wind Bz — the geomagnetic coupling parameter.',
       'Magnitude filter, event list, and detail panel. Correlation is visual, not scientific.',
+    ],
+  },
+  {
+    id: 'SYSTEM',
+    color: '#2dd4bf',
+    title: 'Solar System Simulator',
+    lines: [
+      'Real-time 3D orbital simulation of all 8 planets with accurate periods and axial tilts.',
+      'Procedural GLSL shaders for each planet — FBM noise surface, gas giant band patterns.',
+      'Dynamic lighting from the Sun — each planet lit from its actual orbital position.',
+      'Click any planet to focus camera and view detailed data. Speed control and pause/play.',
+    ],
+  },
+  {
+    id: 'WEATHER',
+    color: '#38bdf8',
+    title: 'Earth Weather',
+    lines: [
+      'Click anywhere on the 3D globe to fetch live weather for that location.',
+      'Current conditions: temperature, feels like, humidity, wind, pressure, precipitation.',
+      'Sun rise/set times with a live daylight progress bar. UV index with color-coded risk scale.',
+      'Air quality index (US AQI, PM2.5, PM10) from Open-Meteo. 7-day forecast with temp range bars.',
+    ],
+  },
+  {
+    id: 'GALAXIES',
+    color: '#a78bfa',
+    title: '100,000 Stars',
+    lines: [
+      'An interactive visualization of the stellar neighborhood — 119,617 stars from the Hipparcos catalog rendered in WebGL.',
+      'Zoom from the full Milky Way down to individual named stars. Each star positioned at its real cartesian coordinates.',
+      'Spectral color index mode maps B-V values to actual star temperatures — from red M-dwarfs at 3,840K to blue O-type supergiants at 42,000K.',
+      '10-stop narrated guided tour with per-stop audio, synced captions, and cinematic camera transitions through the stellar neighborhood.',
+      'Click any named star to pull up spectral class, radius, B-V index, and a direct Wikipedia link.',
+    ],
+  },
+  {
+    id: 'THUNDER',
+    color: '#facc15',
+    title: 'Global Lightning Tracker',
+    lines: [
+      'Live WebSocket stream from the Blitzortung crowdsourced lightning detection network.',
+      'Every strike rendered as an animated flash on a 3D Earth globe with geographic coordinates.',
+      'Strike counter, active region heatmap, and per-strike timestamp in the side panel.',
+      'Optional thunder sound effects synced to each detected strike event.',
+    ],
+  },
+  {
+    id: 'STORMS',
+    color: '#34d399',
+    title: 'Tropical Storm Tracker',
+    lines: [
+      'Active tropical cyclones from the JTWC RSS feed — Atlantic, Pacific, and Indian Ocean basins.',
+      'Storm track rendered on a 3D globe with animated forecast cone and travelling pulse dot.',
+      'Per-storm data: category, sustained winds, central pressure, and 5-day forecast waypoints.',
+      'Storm list panel with real-time category badges and basin filtering.',
+    ],
+  },
+  {
+    id: 'SIGNAL',
+    color: '#38bdf8',
+    title: 'NASA Deep Space Network',
+    lines: [
+      'Live telemetry from all three DSN complexes — Goldstone (CA), Madrid (ES), and Canberra (AU).',
+      'Per-dish link cards showing active spacecraft target, signal direction, uplink/downlink data rates.',
+      'Animated signal travel bar visualizing the one-way light-time delay to each spacecraft.',
+      'Log-scale radial network map plotting spacecraft distances from Earth — from LEO to the Voyagers.',
+    ],
+  },
+  {
+    id: 'MOON',
+    color: '#94a3b8',
+    title: 'Selene — Interactive Moon Globe',
+    lines: [
+      'Full 3D Moon globe with NASA LROC high-resolution color and bump displacement textures.',
+      '25 landing sites — Apollo, Luna, Chang\'e, Chandrayaan, and Artemis zones — with pulse animations.',
+      'Terminator line calculated from real UTC time. Crater rings, water ice deposits, and Artemis landing zones as toggleable overlays.',
+      'Time scrubber with mission quick-jump buttons. Click any site for mission details, country flag, and landing date.',
+    ],
+  },
+  {
+    id: 'TIDES',
+    color: '#4FC3F7',
+    title: 'Tidal Gravity Simulation',
+    lines: [
+      'Custom GLSL vertex shader deforms the Earth mesh using the P₂ Legendre polynomial — tidal bulge is physically derived, not faked.',
+      'LIVE mode: real NOAA tidal predictions for 5 US coastal stations with sparklines and flooding/ebbing trend.',
+      'WHAT IF mode: drag the Moon from the Roche limit to 5× current distance. Watch tidal forces change by 3 orders of magnitude.',
+      'DEEP TIME mode: scrub through 4.5 billion years — from the Theia impact to the Sun\'s red giant phase.',
     ],
   },
 ];
@@ -325,8 +470,8 @@ export function About() {
       {/* ── STATS ROW ── */}
       <section className="border-b border-white/5 grid grid-cols-2 md:grid-cols-4">
         {[
-          { n: 12, suffix: '', label: 'LIVE DATA SOURCES' },
-          { n: 8, suffix: '', label: 'INTERACTIVE MODULES' },
+          { n: 19, suffix: '', label: 'LIVE DATA SOURCES' },
+          { n: 16, suffix: '', label: 'INTERACTIVE MODULES' },
           { n: 5, suffix: 'S', label: 'ISS UPDATE INTERVAL' },
           { n: 100, suffix: '%', label: 'FREE & OPEN SOURCE' },
         ].map((s, i) => (
@@ -374,7 +519,7 @@ export function About() {
                 >
                   {mod.id}
                 </span>
-                <span className="text-[10px] tracking-[0.2em] text-white/20 uppercase">{`0${i + 1} / 08`}</span>
+                <span className="text-[10px] tracking-[0.2em] text-white/20 uppercase">{`${String(i + 1).padStart(2, '0')} / ${MODULES.length}`}</span>
               </div>
 
               <div>
